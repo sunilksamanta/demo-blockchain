@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/sunilthedj/demo-blockchain/issues"
   },
-  "homepage": "https://github.com/sunilthedj/demo-blockchain#readme"
+  "homepage": "https://github.com/sunilthedj/demo-blockchain#readme",
+  "dependencies": {
+    "crypto-js": "^3.1.9-1"
+  }
 }
