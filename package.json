@@ -1,0 +1,22 @@
+{
+  "name": "demo-blockchain",
+  "version": "1.0.0",
+  "description": "Demo Block Chain",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sunilthedj/demo-blockchain.git"
+  },
+  "keywords": [
+    "blockchain"
+  ],
+  "author": "Sunil K Samanta",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sunilthedj/demo-blockchain/issues"
+  },
+  "homepage": "https://github.com/sunilthedj/demo-blockchain#readme"
+}
