@@ -8,10 +8,24 @@ class Block {
         this.data = data;
         this.previousHash = previousHash;
         this.hash = '';
+        this.randomDependency = 0;
     }
 
     calculateHash(){
-        return sha256(JSON.stringify(this.data) + this.position.toString() + this.timestamp.toString() + this.previousHash.toString()).toString();
+        return sha256(JSON.stringify(this.data) + this.position.toString() + this.timestamp.toString() + this.previousHash.toString() + this.randomDependency).toString();
+    }
+
+    mineBlock(difficulty){
+        let startTime = new Date();
+        console.log('Block Mining Started for ' + this.position + '\n');
+        let count = 0;
+        while(this.hash.substr(0, difficulty) !== Array(difficulty + 1).join("0")){
+            this.randomDependency++;
+            count++;
+            this.hash = this.calculateHash();
+        }
+        console.log('Block Mined! :\nHash: ' + this.hash + '\nIteration: ' + count + '\nETA: ' + (new Date() - startTime) + 'ms\n');
+        console.log('----------------------------------------------------------');
     }
     
 }
@@ -21,6 +35,7 @@ class Block {
 class Blockchain {
     constructor(){
         this.chain =[Blockchain.createGenesisBlockForChain()];
+        this.difficulty = 5;
     }
 
     static createGenesisBlockForChain(){
@@ -33,7 +48,7 @@ class Blockchain {
 
     addBlockToChain(newBlock){
         newBlock.previousHash = this.getLastBlockFromChain().hash;
-        newBlock.hash = newBlock.calculateHash();
+        newBlock.mineBlock(this.difficulty);
         this.chain.push(newBlock);
     }
 
@@ -60,6 +75,3 @@ demoChain.addBlockToChain(new Block(4, {sender_id: 3, recipient_id: 4, amount: 3
 
 console.log('Is valid? ', demoChain.isValidChain());
 console.log(JSON.stringify(demoChain, null, 4));
-demoChain.chain[2].data.amount = 10000;
-console.log(JSON.stringify(demoChain, null, 4));
-console.log('Is valid? ', demoChain.isValidChain());
